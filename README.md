@@ -1,6 +1,6 @@
 # GUI Calculator
 
-One Paragraph of project description goes here
+This is a calculator made with Python using PyQt5 GUI.
 
 ## Getting Started
 
@@ -11,23 +11,24 @@ These instructions will get you a copy of the project up and running on your loc
 To execute the calculator, PyQt5 must be installed.
 
 ```
-Give examples
+Anaconda Prompt: conda install -c anaconda pyqt
 ```
 
 
 
 ## Built With
 
-* [PyQt5](http://www.dropwizard.io/1.0.2/docs/) - The GUI framework used
+* [PyQt5](https://pypi.org/project/PyQt5/) - The GUI framework used
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTING.md](https://github.com/5almiakki/gui_calculator/blob/main/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Studyingrabbit** - *Initial work* - [Studyingrabbit](http://studyingrabbit.tistory.com)
+* **5almiakki** - *Init repository* - [5almiakki](https://github.com/5almiakki)
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
