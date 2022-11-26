@@ -12,9 +12,6 @@ class Main(QDialog):
         main_layout = QVBoxLayout()
 
         ### 각 위젯을 배치할 레이아웃을 미리 만들어 둠
-        # layout_operation = QHBoxLayout()
-        # layout_clear_equal = QHBoxLayout()
-        # layout_number = QGridLayout()
         layout_value = QFormLayout()
         layout_modulo_clear = QHBoxLayout()     # %, CE, C, Backspace
         layout_operator = QHBoxLayout()         # 1/x, x^2, x^(1/2), /
@@ -66,7 +63,7 @@ class Main(QDialog):
         ### 숫자 버튼 생성하고, layout_number 레이아웃에 추가
         ### 각 숫자 버튼을 클릭했을 때, 숫자가 수식창에 입력 될 수 있도록 시그널 설정
         number_button_dict = {}
-        for number in range(1, 10):
+        for number in range(0, 10):
             number_button_dict[number] = QPushButton(str(number))
             number_button_dict[number].clicked.connect(lambda state, num = number:
                                                        self.number_button_clicked(num))
@@ -85,41 +82,25 @@ class Main(QDialog):
         button_plus_minus.clicked.connect(lambda state, operation = "+/-": self.button_operation_clicked(operation))
         layout_number.addWidget(button_plus_minus, 3, 0)
 
-        # ### =, clear, clear_equation, backspace 버튼을 layout_clear_equal 레이아웃에 추가
-        # layout_clear_equal.addWidget(button_clear_equation)
-        # layout_clear_equal.addWidget(button_clear)
-        # layout_clear_equal.addWidget(button_backspace)
-        # layout_clear_equal.addWidget(button_equal)
-
-        # ### 사칙연산 버튼을 layout_operation 레이아웃에 추가
-        # layout_operation.addWidget(button_plus)
-        # layout_operation.addWidget(button_minus)
-        # layout_operation.addWidget(button_product)
-        # layout_operation.addWidget(button_division)
-        # layout_operation.addWidget(button_modulo)
-        # layout_operation.addWidget(button_inverse)
-        # layout_operation.addWidget(button_square)
-        # layout_operation.addWidget(button_sqrt)
-
-        ### layout_modulo_clear
+        ### layout_modulo_clear에 버튼 추가
         layout_modulo_clear.addWidget(button_modulo)
         layout_modulo_clear.addWidget(button_clear_equation)
         layout_modulo_clear.addWidget(button_clear)
         layout_modulo_clear.addWidget(button_backspace)
 
-        ### layout_operator
+        ### layout_operator에 버튼 추가
         layout_operator.addWidget(button_inverse)
         layout_operator.addWidget(button_square)
         layout_operator.addWidget(button_sqrt)
         layout_operator.addWidget(button_division)
 
-        ### layout_operator_equal
+        ### layout_operator_equal에 버튼 추가
         layout_operator_equal.addWidget(button_product)
         layout_operator_equal.addWidget(button_minus)
         layout_operator_equal.addWidget(button_plus)
         layout_operator_equal.addWidget(button_equal)
 
-        ### layout_number_operator
+        ### layout_number_operator에 레이아웃 추가
         layout_number_operator.addLayout(layout_number)
         layout_number_operator.addLayout(layout_operator_equal)
 
