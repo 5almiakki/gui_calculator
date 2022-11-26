@@ -19,7 +19,7 @@ class Main(QDialog):
         label_value = QLabel("Value: ")
         self.value = QLineEdit("")
 
-        ### layout_value_solution 레이아웃에 수식, 답 위젯을 추가
+        ### layout_value_value 레이아웃에 수식, 답 위젯을 추가
         layout_value.addRow(label_value, self.value)
 
         ### 사칙연산 버튼 생성
@@ -101,12 +101,12 @@ class Main(QDialog):
 
     def button_equal_clicked(self):
         value = self.value.text()
-        solution = eval(value)
-        self.solution.setText(str(solution))
+        value = eval(value)
+        self.value.setText(str(value))
 
     def button_clear_clicked(self):
         self.value.setText("")
-        self.solution.setText("")
+        self.value.setText("")
 
     def button_backspace_clicked(self):
         value = self.value.text()
