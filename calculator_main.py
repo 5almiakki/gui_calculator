@@ -8,6 +8,7 @@ class Main(QDialog):
 
     def init_ui(self):
         self.operand = 0
+        self.operator = ''
         main_layout = QVBoxLayout()
 
         ### 각 위젯을 배치할 레이아웃을 미리 만들어 둠
@@ -29,17 +30,31 @@ class Main(QDialog):
         button_product = QPushButton("x")
         button_division = QPushButton("/")
 
+        ### 모듈러, 역수, 제곱, 제곱근 버튼 생성
+        button_modulo = QPushButton("%")
+        button_inverse = QPushButton("1/x")
+        button_square = QPushButton("x²")
+        button_sqrt = QPushButton("√x")
+
         ### 사칙연산 버튼을 클릭했을 때, 각 사칙연산 부호가 수식창에 추가될 수 있도록 시그널 설정
         button_plus.clicked.connect(lambda state, operation = "+": self.button_operation_clicked(operation))
         button_minus.clicked.connect(lambda state, operation = "-": self.button_operation_clicked(operation))
         button_product.clicked.connect(lambda state, operation = "*": self.button_operation_clicked(operation))
         button_division.clicked.connect(lambda state, operation = "/": self.button_operation_clicked(operation))
+        button_modulo.clicked.connect(lambda state, operation = "%": self.button_operation_clicked(operation))
+        button_inverse.clicked.connect(lambda state, operation = "1/x": self.button_operation_clicked(operation))
+        button_square.clicked.connect(lambda state, operation = "x^2": self.button_operation_clicked(operation))
+        button_sqrt.clicked.connect(lambda state, operation = "x^(1/2)": self.button_operation_clicked(operation))
 
         ### 사칙연산 버튼을 layout_operation 레이아웃에 추가
         layout_operation.addWidget(button_plus)
         layout_operation.addWidget(button_minus)
         layout_operation.addWidget(button_product)
         layout_operation.addWidget(button_division)
+        layout_operation.addWidget(button_modulo)
+        layout_operation.addWidget(button_inverse)
+        layout_operation.addWidget(button_square)
+        layout_operation.addWidget(button_sqrt)
 
         ### =, clear, backspace 버튼 생성
         button_equal = QPushButton("=")
@@ -96,9 +111,17 @@ class Main(QDialog):
         self.value.setText(value)
 
     def button_operation_clicked(self, operation):
-        self.operand = float(self.value.text())
-        self.operator = operation
-        self.value.setText('')
+        if operation == '1/x':
+            value = 1 / float(self.value.text())
+        elif operation == 'x^2':
+            value = float(self.value.text()) ** 2
+        elif operation == 'x^(1/2)':
+            value = float(self.value.text()) ** (1/2)
+        else:
+            value = ''
+            self.operand = float(self.value.text())
+            self.operator = operation
+        self.value.setText(str(value))
 
     def button_equal_clicked(self):
         value = float(self.value.text())
@@ -110,6 +133,8 @@ class Main(QDialog):
             value = self.operand * value
         elif self.operator == '/':
             value = self.operand / value
+        elif self.operator == '%':
+            value = self.operand % value
         self.value.setText(str(value))
 
     def button_clear_clicked(self):
