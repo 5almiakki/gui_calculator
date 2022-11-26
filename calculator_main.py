@@ -56,17 +56,20 @@ class Main(QDialog):
         layout_operation.addWidget(button_square)
         layout_operation.addWidget(button_sqrt)
 
-        ### =, clear, backspace 버튼 생성
+        ### =, clear, clear_equation, backspace 버튼 생성
         button_equal = QPushButton("=")
-        button_clear = QPushButton("Clear")
+        button_clear = QPushButton("C")
+        button_clear_equation = QPushButton("CE")
         button_backspace = QPushButton("Backspace")
 
-        ### =, clear, backspace 버튼 클릭 시 시그널 설정
+        ### =, clear, clear_equation, backspace 버튼 클릭 시 시그널 설정
         button_equal.clicked.connect(self.button_equal_clicked)
         button_clear.clicked.connect(self.button_clear_clicked)
+        button_clear_equation.clicked.connect(self.button_clear_clicked)
         button_backspace.clicked.connect(self.button_backspace_clicked)
 
-        ### =, clear, backspace 버튼을 layout_clear_equal 레이아웃에 추가
+        ### =, clear, clear_equation, backspace 버튼을 layout_clear_equal 레이아웃에 추가
+        layout_clear_equal.addWidget(button_clear_equation)
         layout_clear_equal.addWidget(button_clear)
         layout_clear_equal.addWidget(button_backspace)
         layout_clear_equal.addWidget(button_equal)
@@ -84,14 +87,14 @@ class Main(QDialog):
             elif number==0:
                 layout_number.addWidget(number_button_dict[number], 3, 1)
 
-        ### 소숫점 버튼과 00 버튼을 입력하고 시그널 설정
+        ### 소숫점 버튼과 +/- 버튼을 입력하고 시그널 설정
         button_dot = QPushButton(".")
         button_dot.clicked.connect(lambda state, num = ".": self.number_button_clicked(num))
         layout_number.addWidget(button_dot, 3, 2)
 
-        button_double_zero = QPushButton("00")
-        button_double_zero.clicked.connect(lambda state, num = "00": self.number_button_clicked(num))
-        layout_number.addWidget(button_double_zero, 3, 0)
+        button_plus_minus = QPushButton("+/-")
+        button_plus_minus.clicked.connect(lambda state, operation = "+/-": self.button_operation_clicked(operation))
+        layout_number.addWidget(button_plus_minus, 3, 0)
 
         ### 각 레이아웃을 main_layout 레이아웃에 추가
         main_layout.addLayout(layout_value)
@@ -117,6 +120,8 @@ class Main(QDialog):
             value = float(self.value.text()) ** 2
         elif operation == 'x^(1/2)':
             value = float(self.value.text()) ** (1/2)
+        elif operation == '+/-':
+            value = 0 - float(self.value.text())
         else:
             value = ''
             self.operand = float(self.value.text())
