@@ -7,6 +7,7 @@ class Main(QDialog):
         self.init_ui()
 
     def init_ui(self):
+        self.operand = 0
         main_layout = QVBoxLayout()
 
         ### 각 위젯을 배치할 레이아웃을 미리 만들어 둠
@@ -95,13 +96,20 @@ class Main(QDialog):
         self.value.setText(value)
 
     def button_operation_clicked(self, operation):
-        value = self.value.text()
-        value += operation
-        self.value.setText(value)
+        self.operand = float(self.value.text())
+        self.operator = operation
+        self.value.setText('')
 
     def button_equal_clicked(self):
-        value = self.value.text()
-        value = eval(value)
+        value = float(self.value.text())
+        if self.operator == '+':
+            value = self.operand + value
+        elif self.operator == '-':
+            value = self.operand - value
+        elif self.operator == '*':
+            value = self.operand * value
+        elif self.operator == '/':
+            value = self.operand / value
         self.value.setText(str(value))
 
     def button_clear_clicked(self):
